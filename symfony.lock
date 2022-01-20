@@ -201,20 +201,18 @@
         "version": "v5.4.2"
     },
     "symfony/framework-bundle": {
-        "version": "4.4",
+        "version": "6.0",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
-            "version": "4.4",
-            "ref": "3b9c85f14cad439042f88f94a1fd15fb8ed923c9"
+            "version": "5.4",
+            "ref": "d4131812e20853626928e73d3effef44014944c0"
         },
         "files": [
-            "./config/bootstrap.php",
             "./config/packages/cache.yaml",
             "./config/packages/framework.yaml",
-            "./config/packages/test/framework.yaml",
             "./config/preload.php",
-            "./config/routes/dev/framework.yaml",
+            "./config/routes/framework.yaml",
             "./config/services.yaml",
             "./public/index.php",
             "./src/Controller/.gitignore",
@@ -299,9 +297,6 @@
     "symfony/polyfill-php72": {
         "version": "v1.24.0"
     },
-    "symfony/polyfill-php73": {
-        "version": "v1.24.0"
-    },
     "symfony/polyfill-php80": {
         "version": "v1.24.0"
     },
@@ -330,6 +325,9 @@
             "./config/routes.yaml"
         ]
     },
+    "symfony/runtime": {
+        "version": "v6.0.0"
+    },
     "symfony/security-bundle": {
         "version": "5.4",
         "recipe": {
@@ -346,9 +344,6 @@
         "version": "v5.4.2"
     },
     "symfony/security-csrf": {
-        "version": "v5.4.0"
-    },
-    "symfony/security-guard": {
         "version": "v5.4.0"
     },
     "symfony/security-http": {

@@ -13,9 +13,7 @@
 
         <!-- ###+ symfony/framework-bundle ### -->
         <env name="APP_ENV" value="dev"/>
-        <env name="APP_SECRET" value="e2dc70aea0cf995a07e36396a315ce0d"/>
-        <!-- env name="TRUSTED_PROXIES" value="127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16" -->
-        <!-- env name="TRUSTED_HOSTS" value="'^(localhost|example\.com)$'" -->
+        <env name="APP_SECRET" value="6dd3b09550f7df849078f9100c7b0bcb"/>
         <!-- ###- symfony/framework-bundle ### -->
 
         <!-- ###+ symfony/mailer ### -->
