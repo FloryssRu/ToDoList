@@ -1,6 +1,3 @@
 framework:
     test: true
-    session:
-        # factory:
-        #     native: session.storage.mock_file
-        storage_id: session.storage.mock_file
+    storage_id: session.storage.mock_file
