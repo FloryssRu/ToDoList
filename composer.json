@@ -34,7 +34,9 @@
         "symfony/maker-bundle": "^1.36",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "symfony/stopwatch": "^6.0",
-        "symfony/web-profiler-bundle": "^6.0"
+        "symfony/web-profiler-bundle": "^6.0",
+        "phpro/grumphp": "^1.7",
+        "phpstan/phpstan": "^1.4"
     },
     "autoload": {
         "psr-4": {
