@@ -1,5 +1,6 @@
 {
     "name": "saro0h/to-do-list",
+    "description": "8th project for Openclassrooms",
     "license": "proprietary",
     "type": "project",
     "require": {
