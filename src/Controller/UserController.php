@@ -42,6 +42,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+            $user->setRoles([$form->get("roles_options")->getData()]);
 
             $this->em->persist($user);
             $this->em->flush();
@@ -59,12 +60,13 @@ class UserController extends AbstractController
      */
     public function edit(User $user, Request $request)
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, ['actual_role' => $user->getRoles()[0]]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+            $user->setRoles([$form->get("roles_options")->getData()]);
 
             $this->em->flush();
 
