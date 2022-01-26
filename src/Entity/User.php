@@ -71,6 +71,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername($username)
     {
         $this->username = $username;
+
+        return $this;
     }
 
     /**
@@ -99,9 +101,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword($password)
     {
         $this->password = $password;
+
+        return $this;
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -109,6 +113,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
     }
 
     public function setRoles(array $roles): self
