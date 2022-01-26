@@ -11,20 +11,11 @@ class DefaultControllerTest extends WebTestCase
         $client = static::createClient();
 
         $client->request('GET', '/');
-        $response = $client->getResponse();
+        
+        $this->assertResponseStatusCodeSame(302);
+        $this->assertResponseRedirects('http://localhost/login');
 
-        $this->assertEquals(302, $response->getStatusCode());
+        //$response = $client->getResponse();
+        //$this->assertEquals(302, $response->getStatusCode());
     }
-
-    // public function testIndexWithLogin(): void
-    // {
-    //     // connexion
-
-    //     $client = static::createClient();
-
-    //     $client->request('GET', '/');
-    //     $response = $client->getResponse();
-
-    //     $this->assertEquals(200, $response->getStatusCode());
-    // }
 }

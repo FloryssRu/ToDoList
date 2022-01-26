@@ -11,73 +11,48 @@ class TaskControllerTest extends WebTestCase
         $client = static::createClient();
 
         $client->request('GET', '/tasks');
-        $response = $client->getResponse();
-
-        $this->assertEquals(302, $response->getStatusCode());
+        
+        $this->assertResponseStatusCodeSame(302);
+        $this->assertResponseRedirects('http://localhost/login');
     }
-
-    // public function testListTasksWithLogin(): void
-    // {
-    //     // ...
-    // }
 
     public function testCreateTaskWithoutLogin(): void
     {
         $client = static::createClient();
 
         $client->request('GET', '/tasks/create');
-        $response = $client->getResponse();
 
-        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertResponseStatusCodeSame(302);
+        $this->assertResponseRedirects('http://localhost/login');
     }
-
-    // public function testCreateTaskWithLogin(): void
-    // {
-    //     // ...
-    // }
 
     public function testEditTaskWithoutLogin(): void
     {
         $client = static::createClient();
 
         $client->request('GET', '/tasks/1/edit');
-        $response = $client->getResponse();
 
-        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertResponseStatusCodeSame(302);
+        $this->assertResponseRedirects('http://localhost/login');
     }
-
-    // public function testEditTaskWithLogin(): void
-    // {
-    //     // ...
-    // }
 
     public function testToogleTaskWithoutLogin(): void
     {
         $client = static::createClient();
 
         $client->request('GET', '/tasks/1/toggle');
-        $response = $client->getResponse();
 
-        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertResponseStatusCodeSame(302);
+        $this->assertResponseRedirects('http://localhost/login');
     }
-
-    // public function testToogleTaskWithLogin(): void
-    // {
-    //     // ...
-    // }
 
     public function testDeleteTaskWithoutLogin(): void
     {
         $client = static::createClient();
 
         $client->request('GET', '/tasks/1/delete');
-        $response = $client->getResponse();
 
-        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertResponseStatusCodeSame(302);
+        $this->assertResponseRedirects('http://localhost/login');
     }
-
-    // public function testDeleteTaskWithLogin(): void
-    // {
-    //     // ...
-    // }
 }
