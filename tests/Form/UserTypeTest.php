@@ -2,9 +2,33 @@
 
 namespace Tests\Form;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Entity\User;
+use App\Form\UserType;
+use Symfony\Component\Form\Test\TypeTestCase;
 
-class UserTypeTest extends WebTestCase
+class UserTypeTest extends TypeTestCase
 {
-    //...
+    public function testBuildForm(): void
+    {
+        $formData = [
+            'username' => 'test',
+            'password' => ['first' => 'secret', 'second' => 'secret'],
+            'email' => 'test@example.com',
+            'roles_options' => 'ROLE_USER'
+        ];
+
+        $model = new User();
+        $form = $this->factory->create(UserType::class, $model);
+        $form->submit($formData);
+
+        $expected = (new User())
+            ->setUsername('test')
+            ->setPassword('secret')
+            ->setEmail('test@example.com')
+        ;
+        
+        $this->assertTrue($form->isSynchronized());
+
+        $this->assertEquals($expected, $model);
+    }
 }
