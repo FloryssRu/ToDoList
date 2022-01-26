@@ -2,27 +2,63 @@
 
 namespace Tests;
 
+use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AppTest extends WebTestCase
 {
+    private KernelBrowser $client;
+
+    public function setUp(): void
+    {
+        $this->client = static::createClient();
+    }
+
+    public function userLogin()
+    {
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(["email" => 'user@email.com']);
+
+        // simulate $testUser being logged in
+        $this->client->loginUser($testUser);
+    }
+
     public function testViewHomepage()
     {
-        // on se connecte en tant qu'user classique
+        $this->userLogin();
 
-        // on arrive bien sur la homepage avec un statut 200
-        // $this->assertResponseStatusCodeSame(200);
-        // $this->assertSelectorTextContains('h1', "Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !");
+        $this->client->request('GET', '/');
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertSelectorTextContains('h1', "Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !");
     }
 
     // Tasks ---------
 
     public function testCreateTask()
     {
-        // on se connecte en tant qu'user classique
-        // on clique sur "créer une tâche"
-        // on crée la tâche
-        // on vérifie que tout est bon
+        $this->userLogin();
+
+        $crawler = $this->client->request('GET', '/tasks/create');
+
+        $form = $crawler->selectButton('Ajouter')->form([
+            'task' => [
+                'title' => 'Une nouvelle tâche',
+                'content' => 'pour tester testCreateTask()'
+            ]
+        ]);
+
+        $this->client->submit($form);
+        $this->assertResponseRedirects('/tasks');
+
+        $this->client->followRedirect();
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertSelectorExists('.alert.alert-success');
+        $this->assertSelectorTextContains('h1', 'Liste des tâches');
     }
 
     public function testEditTask()
