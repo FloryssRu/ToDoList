@@ -9,7 +9,10 @@ class AppTest extends WebTestCase
     public function testViewHomepage()
     {
         // on se connecte en tant qu'user classique
+
         // on arrive bien sur la homepage avec un statut 200
+        // $this->assertResponseStatusCodeSame(200);
+        // $this->assertSelectorTextContains('h1', "Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !");
     }
 
     // Tasks ---------

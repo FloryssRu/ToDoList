@@ -301,6 +301,9 @@
             "./config/bootstrap.php"
         ]
     },
+    "symfony/css-selector": {
+        "version": "v6.0.2"
+    },
     "symfony/dependency-injection": {
         "version": "v5.4.2"
     },
