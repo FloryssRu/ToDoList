@@ -40,7 +40,8 @@
         "symfony/web-profiler-bundle": "^6.0",
         "phpro/grumphp": "^1.7",
         "phpstan/phpstan": "^1.4",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "liip/test-fixtures-bundle": "^2.2"
     },
     "autoload": {
         "psr-4": {
