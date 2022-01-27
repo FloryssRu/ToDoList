@@ -17,12 +17,21 @@ class UserRepositoryTest extends KernelTestCase
         $this->entityManager = self::getContainer()->get(EntityManagerInterface::class);
     }
 
-    public function testCountAllTasks(): void
+    public function testFindAnonymousUser(): void
     {
         self::bootKernel();
 
-        $tasks = $this->entityManager->getRepository(User::class)->findAll([]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'anonymous']);
 
-        $this->assertEquals(3, count($tasks));
+        $this->assertIsObject($user);
+    }
+
+    public function testFindAll(): void
+    {
+        self::bootKernel();
+
+        $users = $this->entityManager->getRepository(User::class)->findAll();
+
+        $this->assertGreaterThanOrEqual(3, $users);
     }
 }

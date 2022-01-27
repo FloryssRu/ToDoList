@@ -17,12 +17,12 @@ class TaskRepositoryTest extends KernelTestCase
         $this->entityManager = self::getContainer()->get(EntityManagerInterface::class);
     }
 
-    // public function testCountAllTasks(): void
-    // {
-    //     self::bootKernel();
+    public function testFindAll(): void
+    {
+        self::bootKernel();
 
-    //     $tasks = $this->entityManager->getRepository(Task::class)->findAll([]);
+        $tasks = $this->entityManager->getRepository(Task::class)->findAll();
 
-    //     $this->assertEquals(6, count($tasks));
-    // }
+        $this->assertGreaterThanOrEqual(6, $tasks);
+    }
 }
