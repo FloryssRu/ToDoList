@@ -41,7 +41,8 @@
         "phpro/grumphp": "^1.7",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
-        "liip/test-fixtures-bundle": "^2.2"
+        "liip/test-fixtures-bundle": "^2.2",
+        "dama/doctrine-test-bundle": "^6.7"
     },
     "autoload": {
         "psr-4": {

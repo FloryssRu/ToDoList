@@ -2,20 +2,43 @@
 
 namespace Tests\Controller;
 
+use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
+    private KernelBrowser $client;
+
+    public function setUp(): void
+    {
+        $this->client = static::createClient();
+    }
+
+    public function userLogin()
+    {
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        $testUser = $userRepository->findOneBy(["email" => 'user@email.com']);
+
+        $this->client->loginUser($testUser);
+    }
+
     public function testIndexWithoutLogin(): void
     {
-        $client = static::createClient();
-
-        $client->request('GET', '/');
+        $this->client->request('GET', '/');
         
         $this->assertResponseStatusCodeSame(302);
         $this->assertResponseRedirects('http://localhost/login');
+    }
 
-        //$response = $client->getResponse();
-        //$this->assertEquals(302, $response->getStatusCode());
+    public function testViewHomepage()
+    {
+        $this->userLogin();
+
+        $this->client->request('GET', '/');
+
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertSelectorTextContains('h1', "Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !");
     }
 }
