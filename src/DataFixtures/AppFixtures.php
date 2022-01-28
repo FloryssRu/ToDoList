@@ -36,6 +36,14 @@ class AppFixtures extends Fixture
         ;
         $manager->persist($simpleuser);
 
+        $simpleuser2 = new User();
+        $simpleuser2
+            ->setUsername("simple_user_2_modify")
+            ->setPassword('$2y$13$4SIFFYxzfVYr1DAVYBHBZ.h1.dmULX2XzjDMtodVrFX.klFXHiqDu')
+            ->setEmail("user2modify@email.com")
+        ;
+        $manager->persist($simpleuser2);
+
         $task1 = new Task();
         $task1
             ->setTitle("Première tâche")
