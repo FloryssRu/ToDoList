@@ -3,21 +3,85 @@
 namespace App\Tests\Entity;
 
 use App\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\Manager\UserManager;
+use App\Repository\TaskRepository;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
-class UserTest extends KernelTestCase
+class UserTest extends TestCase
 {
-    public function testCreateUser()
+    private $taskRepository;
+
+    private $userRepository;
+
+    private $entityManager;
+
+    public function setUp(): void
     {
-        $user = (new User)
-            ->setEmail("email@email.com")
-            ->setUsername("username")
-            ->setPassword("this_password_is_hashed")
+        $this->taskRepository = $this->createMock(TaskRepository::class);
+        $this->userRepository = $this->createMock(UserRepository::class);
+        $this->entityManager = $this->createMock(EntityManagerInterface::class);
+        $this->hasher = $this->createMock(PasswordHasherInterface::class);
+        $this->entity = new UserManager(
+            $this->taskRepository,
+            $this->userRepository,
+            $this->entityManager,
+            $this->hasher
+        );
+    }
+
+    public function testUserHasRoles()
+    {
+        $user = new User();
+        $user
+            ->setUsername('username')
+            ->setEmail('email@email.com')
+            ->setPassword('secret')
         ;
 
-        self::bootKernel();
-        $errors = KernelTestCase::getContainer()->get(ValidatorInterface::class)->validate($user);
-        $this->assertCount(0, $errors);
+        $this->assertIsArray($user->getRoles());
+    }
+
+    public function testCreateUser()
+    {
+        $userAdmin = new User();
+        $userAdmin
+            ->setUsername('username')
+            ->setEmail('email@email.com')
+            ->setPassword($this->entity->hashPassword('secret'))
+            ->setRoles(['ROLE_ADMIN'])
+        ;
+
+        $newUser = new User();
+        $newUser
+            ->setUsername('usernameNew')
+            ->setEmail("newuser@email.com")
+            ->setPassword($this->entity->hashPassword('secret'))
+        ;
+
+        $expected = clone $newUser;
+
+        $actual = $this->entity->createUser($userAdmin, $newUser);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testGetUsers()
+    {
+        $user[0] = new User();
+        $user[0]
+            ->setUsername('username')
+            ->setEmail("user@email.com")
+            ->setPassword($this->entity->hashPassword('secret'))
+        ;
+        $this->userRepository->expects($this->any())->method("findAll")->willReturn($user);
+
+        $expected[0] = clone $user[0];
+
+        $actual = $this->entity->getUsers();
+
+        $this->assertEquals($expected, $actual);
     }
 }
