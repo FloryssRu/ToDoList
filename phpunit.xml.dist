@@ -25,10 +25,20 @@
         </testsuite>
     </testsuites>
 
-    <coverage processUncoveredFiles="true">
+    <coverage cacheDirectory="/build/coverage"
+          includeUncoveredFiles="true"
+          processUncoveredFiles="true"
+          pathCoverage="false"
+          ignoreDeprecatedCodeUnits="true"
+          disableCodeCoverageIgnore="true">
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <report>
+            <html outputDirectory="html-coverage" lowUpperBound="50" highLowerBound="90"/>
+            <php outputFile="coverage.php"/>
+            <text outputFile="coverage.txt" showUncoveredFiles="true" showOnlySummary="true"/>
+        </report>
     </coverage>
 
     <listeners>

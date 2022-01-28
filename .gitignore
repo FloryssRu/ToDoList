@@ -14,3 +14,9 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> analysis coverage ###
+/html-coverage/
+coverage.php
+coverage.txt
+###< analysis coverage ###
