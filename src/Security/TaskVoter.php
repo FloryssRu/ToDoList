@@ -57,7 +57,10 @@ class TaskVoter extends Voter
             return true;
         }
         
-        if ($task->getAuthor() === $this->userRepo->findOneBy(['username' => 'anonymous']) && in_array("ROLE_ADMIN", $user->getRoles())) {
+        if (
+            $task->getAuthor() === $this->userRepo->findOneBy(['username' => 'anonymous'])
+            && in_array("ROLE_ADMIN", $user->getRoles())
+        ) {
             return true;
         }
 

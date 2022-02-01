@@ -2,49 +2,37 @@
 
 namespace App\Entity;
 
+use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity
- * @ORM\Table
- */
+#[Entity(repositoryClass: TaskRepository::class)]
+#[ORM\Table]
 class Task
 {
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    #[ORM\Column(type: "integer")]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    private int $id;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Vous devez saisir un titre.")
-     */
-    private $title;
+    #[ORM\Column(type: "string")]
+    #[Assert\NotBlank(message: 'Vous devez saisir un titre.')]
+    private string $title;
 
-    /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Vous devez saisir du contenu.")
-     */
-    private $content;
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank(message: 'Vous devez saisir du contenu.')]
+    private string $content;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isDone;
+    #[ORM\Column(type: 'boolean')]
+    private bool $isDone;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tasks")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $author;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'tasks')]
+    #[ORM\JoinColumn(nullable: false)]
+    private User $author;
 
     public function __construct()
     {
