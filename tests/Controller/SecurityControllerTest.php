@@ -3,6 +3,7 @@
 namespace Tests\Controller;
 
 use App\Repository\UserRepository;
+use Generator;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -33,14 +34,15 @@ class SecurityControllerTest extends WebTestCase
         $this->assertSelectorNotExists('.alert.alert-danger');
     }
 
-    public function testTryToLoginWithInvalidCredentials()
+    /**
+     * @dataProvider provideInvalidCredentials
+     * @param array $formData
+     */
+    public function testTryToLoginWithInvalidCredentials(array $formData)
     {
         $crawler = $this->client->request('GET', '/login');
 
-        $form = $crawler->selectButton('Se connecter')->form([
-            '_username' => 'username',
-            '_password' => 'badPassword'
-        ]);
+        $form = $crawler->selectButton('Se connecter')->form($formData);
 
         $this->client->submit($form);
         $this->assertResponseRedirects('http://localhost/login');
@@ -48,6 +50,37 @@ class SecurityControllerTest extends WebTestCase
         $this->client->followRedirect();
 
         $this->assertSelectorExists('.alert.alert-danger');
+    }
+
+    /**
+     * @return Generator
+     */
+    public function provideInvalidCredentials(): Generator
+    {
+        yield [[
+            "_username" => "simple_user",
+            "_password" => "fail"
+        ]];
+
+        yield [[
+            "_username" => "fail",
+            "_password" => "secret"
+        ]];
+
+        yield [[
+            "_username" => "",
+            "_password" => "secret"
+        ]];
+
+        yield [[
+            "_username" => "simple_user",
+            "_password" => ""
+        ]];
+
+        yield [[
+            "_username" => "",
+            "_password" => ""
+        ]];
     }
 
     public function testTryToLoginWithValidCredentials()
