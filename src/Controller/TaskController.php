@@ -18,7 +18,7 @@ class TaskController extends AbstractController
     {
         $this->em = $em;
     }
-    
+
     #[Route('/tasks', name: 'app_task_list', methods: ['GET'])]
     public function list(TaskRepository $taskRepo)
     {

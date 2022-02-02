@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class TaskVoter extends Voter
 {
-    const DELETE = 'delete';
+    public const DELETE = 'delete';
 
     private $userRepo;
 
@@ -56,7 +56,7 @@ class TaskVoter extends Voter
         if ($user === $task->getAuthor()) {
             return true;
         }
-        
+
         if (
             $task->getAuthor() === $this->userRepo->findOneBy(['username' => 'anonymous'])
             && in_array("ROLE_ADMIN", $user->getRoles())

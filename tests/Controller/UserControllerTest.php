@@ -2,8 +2,6 @@
 
 namespace Tests\Controller;
 
-use App\Entity\Task;
-use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
