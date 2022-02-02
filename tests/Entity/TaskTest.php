@@ -16,6 +16,11 @@ class TaskTest extends TestCase
 
     private $userRepository;
 
+    private $entityManager;
+
+    /** @var TaskManager */
+    private $entity;
+
     public function setUp(): void
     {
         $this->taskRepository = $this->createMock(TaskRepository::class);

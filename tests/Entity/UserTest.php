@@ -18,6 +18,11 @@ class UserTest extends TestCase
 
     private $entityManager;
 
+    private $hasher;
+    
+    /** @var UserManager */
+    private $entity;
+
     public function setUp(): void
     {
         $this->taskRepository = $this->createMock(TaskRepository::class);

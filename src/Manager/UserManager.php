@@ -10,11 +10,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserManager
 {
-    private $entityManager;
-
     private $taskRepository;
 
     private $userRepository;
+
+    private $entityManager;
+
+    private $hasher;
 
     public function __construct(
         TaskRepository $taskRepository,
