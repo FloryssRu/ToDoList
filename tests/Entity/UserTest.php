@@ -19,7 +19,7 @@ class UserTest extends TestCase
     private $entityManager;
 
     private $hasher;
-    
+
     /** @var UserManager */
     private $entity;
 

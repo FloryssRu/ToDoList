@@ -26,7 +26,7 @@ class UserTypeTest extends TypeTestCase
             ->setPassword('secret')
             ->setEmail('test@example.com')
         ;
-        
+
         $this->assertTrue($form->isSynchronized());
 
         $this->assertEquals($expected, $model);

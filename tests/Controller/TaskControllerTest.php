@@ -41,7 +41,7 @@ class TaskControllerTest extends WebTestCase
     public function testListTasksWithoutLogin(): void
     {
         $this->client->request('GET', '/tasks');
-        
+
         $this->assertResponseStatusCodeSame(302);
         $this->assertResponseRedirects('http://localhost/login');
     }

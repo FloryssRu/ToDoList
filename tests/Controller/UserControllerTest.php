@@ -43,7 +43,7 @@ class UserControllerTest extends WebTestCase
     public function testListUsersWithoutLogin(): void
     {
         $this->client->request('GET', '/users');
-        
+
         $this->assertResponseStatusCodeSame(302);
         $this->assertResponseRedirects('http://localhost/login');
     }
@@ -51,7 +51,7 @@ class UserControllerTest extends WebTestCase
     public function testCreateUserWithoutLogin(): void
     {
         $this->client->request('GET', '/users/create');
-        
+
         $this->assertResponseStatusCodeSame(302);
         $this->assertResponseRedirects('http://localhost/login');
     }

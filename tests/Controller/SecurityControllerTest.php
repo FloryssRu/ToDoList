@@ -28,7 +28,7 @@ class SecurityControllerTest extends WebTestCase
     public function testLogin(): void
     {
         $this->client->request('GET', '/login');
-        
+
         $this->assertResponseStatusCodeSame(200);
         $this->assertSelectorTextContains('h1', 'Connectez-vous');
         $this->assertSelectorNotExists('.alert.alert-danger');

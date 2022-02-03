@@ -27,7 +27,7 @@ class DefaultControllerTest extends WebTestCase
     public function testIndexWithoutLogin(): void
     {
         $this->client->request('GET', '/');
-        
+
         $this->assertResponseStatusCodeSame(302);
         $this->assertResponseRedirects('http://localhost/login');
     }

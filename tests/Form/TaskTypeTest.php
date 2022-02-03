@@ -25,7 +25,7 @@ class TaskTypeTest extends TypeTestCase
             ->setContent('test2')
             ->setCreatedAt(new DateTime('10/19/2016 14:48:21'))
         ;
-        
+
         $this->assertTrue($form->isSynchronized());
 
         $this->assertEquals($expected, $model);
