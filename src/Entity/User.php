@@ -23,16 +23,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private int $id;
 
     #[ORM\Column(type: 'string', length: 25, unique: true)]
+    #[Assert\Length(max: 25, maxMessage: "Le nom d'utilisateur ne doit pas dépasser 25 caractères.")]
     #[Assert\NotBlank(message: "Vous devez saisir un nom d'utilisateur.")]
-    private string $username;
+    private ?string $username;
 
     #[ORM\Column(type: 'string', length: 64)]
-    private string $password;
+    #[Assert\NotBlank(message: 'Vous devez saisir un mot de passe.')]
+    #[Assert\Length(max: 64, maxMessage: "Le mot de passe ne doit pas dépasser 64 caractères.")]
+    private ?string $password;
 
     #[ORM\Column(type: 'string', length: 60, unique: true)]
     #[Assert\NotBlank(message: 'Vous devez saisir une adresse email.')]
     #[Assert\Email(message: "Le format de l'adresse n'est pas correct.")]
-    private string $email;
+    #[Assert\Length(max: 60, maxMessage: "L'email ne doit pas dépasser 60 caractères.")]
+    private ?string $email;
 
     #[ORM\Column(type: 'json')]
     #[Assert\NotNull(message: 'Les rôles ne peuvent pas être null.')]
@@ -51,7 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -93,7 +97,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }

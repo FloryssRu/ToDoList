@@ -29,6 +29,7 @@ class UserType extends AbstractType
             ->add('roles_options', ChoiceType::class, [
                 'mapped' => false,
                 'label' => "Rôle de l'utilisateur",
+                'invalid_message' => "Veuillez choisir l'une des deux possibilités de rôles.",
                 'required' => true,
                 'expanded' => true,
                 'multiple' => false,
