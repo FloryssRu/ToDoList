@@ -231,6 +231,17 @@ class UserControllerTest extends WebTestCase
         yield [
             [
                 'user[username]' => 'simple_user_2_modify',
+                'user[password][first]' => 'secret',
+                'user[password][second]' => 'secret',
+                'user[email]' => 'anonymous@email.com',
+                'user[roles_options]' => 'ROLE_USER'
+            ],
+            "This value is already used."
+        ];
+
+        yield [
+            [
+                'user[username]' => 'simple_user_2_modify',
                 'user[password][first]' => '',
                 'user[password][second]' => '',
                 'user[email]' => 'mail_modifie@example.com',
