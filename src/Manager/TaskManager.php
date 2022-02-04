@@ -45,14 +45,14 @@ class TaskManager
             $task = null;
             return $task;
         }
-        return $task;
+        return false;
     }
 
     public function deleteTaskAnonymous(Task $task, ?UserInterface $userAdmin, ?UserInterface $userAnonymous)
     {
         if (in_array('ROLE_ADMIN', $userAdmin->getRoles()) && $task->getAuthor() === $userAnonymous) {
-            return null;
+            return true;
         }
-        return $task;
+        return false;
     }
 }

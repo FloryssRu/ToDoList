@@ -38,6 +38,7 @@ class TaskControllerTest extends WebTestCase
 
         $this->client->loginUser($testUser);
     }
+
     public function testListTasksWithoutLogin(): void
     {
         $this->client->request('GET', '/tasks');

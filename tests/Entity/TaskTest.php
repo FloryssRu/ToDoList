@@ -69,7 +69,7 @@ class TaskTest extends TestCase
 
         $task->setAuthor($user);
 
-        $expected = clone $task; // cette ligne est inutile ??
+        $expected = clone $task;
 
         $actual = $this->entity->deleteTask($task, $user);
 
@@ -91,13 +91,9 @@ class TaskTest extends TestCase
         $user2 = new User();
         $user2->setUsername('username2')->setEmail('email2@email.com')->setPassword('secret');
 
-        $expected = clone $task; // cette ligne est inutile ??
-
         $actual = $this->entity->deleteTask($task, $user2);
 
-        $expected = null;
-
-        $this->assertNotEquals($expected, $actual);
+        $this->assertFalse($actual);
     }
 
     public function testDeleteAnonymousTaskWithAdmin()
@@ -122,12 +118,8 @@ class TaskTest extends TestCase
 
         $task->setAuthor($userAnonymous);
 
-        $expected = clone $task; // cette ligne est inutile ??
-
         $actual = $this->entity->deleteTaskAnonymous($task, $userAdmin, $userAnonymous);
 
-        $expected = null;
-
-        $this->assertEquals($expected, $actual);
+        $this->assertTrue($actual);
     }
 }
