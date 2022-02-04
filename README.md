@@ -1,4 +1,4 @@
-ToDoList : the solution to stay organised
+ToDoList : the solution to stay organised  !
 ========
 
 What is it ?
