@@ -5,13 +5,12 @@ namespace App\Security;
 use App\Entity\Task;
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class TaskVoter extends Voter
 {
-    const DELETE = 'delete';
+    public const DELETE = 'delete';
 
     private $userRepo;
 
@@ -57,8 +56,11 @@ class TaskVoter extends Voter
         if ($user === $task->getAuthor()) {
             return true;
         }
-        
-        if ($task->getAuthor() === $this->userRepo->findOneBy(['id' => 1]) && in_array("ROLE_ADMIN", $user->getRoles())) {
+
+        if (
+            $task->getAuthor() === $this->userRepo->findOneBy(['username' => 'anonymous'])
+            && in_array("ROLE_ADMIN", $user->getRoles())
+        ) {
             return true;
         }
 

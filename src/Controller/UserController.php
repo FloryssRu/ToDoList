@@ -17,22 +17,21 @@ class UserController extends AbstractController
 
     private $em;
 
-    public function __construct(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em)
-    {
+    public function __construct(
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface $em
+    ) {
         $this->passwordHasher = $passwordHasher;
         $this->em = $em;
     }
-    /**
-     * @Route("/users", name="app_user_list", methods={"GET"})
-     */
+
+    #[Route('/users', name: 'app_user_list', methods: ['GET'])]
     public function list(UserRepository $userRepo)
     {
         return $this->render('user/list.html.twig', ['users' => $userRepo->findAll()]);
     }
 
-    /**
-     * @Route("/users/create", name="app_user_create", methods={"GET", "POST"})
-     */
+    #[Route('/users/create', name: 'app_user_create', methods: ['GET', 'POST'])]
     public function create(Request $request)
     {
         $user = new User();
@@ -55,9 +54,7 @@ class UserController extends AbstractController
         return $this->render('user/create.html.twig', ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/users/{id}/edit", name="app_user_edit", methods={"GET", "POST"})
-     */
+    #[Route('/users/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(User $user, Request $request)
     {
         $form = $this->createForm(UserType::class, $user, ['actual_role' => $user->getRoles()[0]]);

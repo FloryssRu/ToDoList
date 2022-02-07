@@ -2,9 +2,25 @@
 /.env.local
 /.env.local.php
 /.env.*.local
+/.env.test
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /tools/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> analysis coverage ###
+/html-coverage/
+coverage.php
+coverage.txt
+###< analysis coverage ###
+
+###> php-cs-fixer ###
+.php-cs-fixer.cache
+###> php-cs-fixer ###
